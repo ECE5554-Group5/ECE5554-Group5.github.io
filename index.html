@@ -40,8 +40,6 @@ color: #FF9900;
 <span style="font-size: 18px; line-height: 1.5em;">Virginia Tech</span>
 <hr>
 
-Please see <a href="http://vision.cs.utexas.edu/projects/adapted_attributes/">this</a> for an example of how to lay out the various details of your project. You may need to provide more details than this, because you will not be submitting an associated paper to accompany the webpage. So the page should be self-contained.
-
 <!-- Goal -->
 <h3>Problem Statement</h3>
 Diffusion models [1] have realized excellent performance in computer vision, with generative applications ranging from human image generation [2] to optical illusions [3], [4] and multimodal generation [5]. Additionally, the surging popularity of commercial applications such as DALL-E2 [6] and Midjourney [7] have catapulted diffusion models into the public eye. While diffusion models can produce highly realistic generation results, they can be difficult to explicitly direct due to the stochastic nature of the sampling process. In this work, we seek to realize increased control over generated image subcomponents by incorporating Canny Edge conditioning strategies from ControlNet [8] into the MultiDiffusion [9] generation pipeline.
@@ -50,27 +48,33 @@ Diffusion models [1] have realized excellent performance in computer vision, wit
 <!-- Approach -->
 <h3>Approach</h3>
 <!-- Figure 1 --> 
-<div style="text-align: center;">
+<figure>
   <img style="height: 300px;" alt="" src="diffusion_process.png">
-  </div>
-  <br><br>
+  <figcaption>Figure 1. Forward and reverse process of denoising diffusion probabilistic models [10].</figcaption>
+</figure>
 Diffusion models are typically modeled as a combination of a forward and a reverse process. While multiple formulations of diffusion models exist, we focus primarily on denoising diffusion probabilistic models (DDPMs), one of the more popular variants of diffusion models [10]. Under the DDPM framework, the forward step consists of repeatedly adding Gaussian noise to an image across multiple time steps until the resulting image is indistinguishable from Gaussian noise. The reverse (generative) process attempts to estimate and remove the noise from the image at each time step using a neural network.
 
-
-<div style="text-align: center;"></div>
-  <img style="height: 300px;" alt="" src="multidiffusion.png">
-  </div>
-  <br><br>
+<br><br>
+<figure>
+  <img style="height: 400px;" alt="" src="multidiffusion.png">
+  <figcaption>Figure 2. MultiDiffusion image generation from masks [9]. </figcaption>
+</figure>
 
 The MultiDiffusion pipeline unifies multiple segmentations in a single diffusion generation [9]. In Figure 2 above, segmentation masks are provided for individual image components. In this example, the background mask is associated with the text prompt “blurred image”, while the two foreground masks are associated with “a mouse” and “a pile of books”, respectively. By training a new generation process on top of a pre-trained, frozen diffusion model, the authors of the MultiDiffusion paper can generate images such as the one in Figure 2, where a mouse is sitting on a pile of books in a visually consistent manner, in the locations specified by the segmentation masks.
-
-<div style="text-align: center;"></div>
+<br><br>
+<figure>
   <img style="height: 300px;" alt="" src="controlnet.png">
-  </div>
-  <br><br>
+  <figcaption>Figure 3. ControlNet image generation from Canny edge input [8]. </figcaption>
+</figure>
 
 By specifying additional conditioning controls and using trainable copies of diffusion models, ControlNet can produce highly specific images [8]. Given an input Canny edge, the ControlNet model learns to produce outputs that closely match, even when conditioned with additional text prompts (Figure 3).
-  
+<br><br>
+
+<figure>
+  <img style="height: 300px;" alt="" src="proposed.png">
+  <figcaption>Figure 4. Proposed pipeline combining ControlNet control strategy with MultiDiffusion image generation. </figcaption>
+</figure>
+By combining Canny edge conditioning from ControlNet with the multiple image segmentation masks approach of MultiDiffusion, we propose creating a pipeline that can dynamically produce multiple highly controllable generations in a single visually coherent image (Figure 4).
 <br><br>
 
 <!-- Plan for Experiments -->
@@ -81,25 +85,25 @@ By specifying additional conditioning controls and using trainable copies of dif
 <!-- References -->
 <h3>References</h3>
 [1]	J. Sohl-Dickstein, E. A. Weiss, N. Maheswaranathan, and S. Ganguli, “Deep Unsupervised Learning using Nonequilibrium Thermodynamics,” Nov. 18, 2015, arXiv: arXiv:1503.03585. Accessed: Oct. 09, 2024. [Online]. Available: http://arxiv.org/abs/1503.03585
-
+<br>
 [2]	A. Kumar Bhunia et al., “Person Image Synthesis via Denoising Diffusion Model,” in 2023 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Vancouver, BC, Canada: IEEE, Jun. 2023, pp. 5968–5976. doi: 10.1109/CVPR52729.2023.00578.
-
+<br>
 [3]	D. Geng, I. Park, and A. Owens, “Factorized Diffusion: Perceptual Illusions by Noise Decomposition,” Apr. 17, 2024, arXiv: arXiv:2404.11615. Accessed: Sep. 26, 2024. [Online]. Available: http://arxiv.org/abs/2404.11615
-
+<br>
 [4]	D. Geng, I. Park, and A. Owens, “Visual Anagrams: Generating Multi-View Optical Illusions with Diffusion Models,” Apr. 02, 2024, arXiv: arXiv:2311.17919. doi: 10.48550/arXiv.2311.17919.
-
+<br>
 [5]	Z. Chen, D. Geng, and A. Owens, “Images that Sound: Composing Images and Sounds on a Single Canvas,” May 20, 2024, arXiv: arXiv:2405.12221. doi: 10.48550/arXiv.2405.12221.
-
+<br>
 [6]	“DALL·E 2.” Accessed: Oct. 07, 2024. [Online]. Available: https://openai.com/index/dall-e-2/
-
+<br>
 [7]	“Midjourney,” Midjourney. Accessed: Oct. 07, 2024. [Online]. Available: https://www.midjourney.com/website
-
+<br>
 [8]	L. Zhang, A. Rao, and M. Agrawala, “Adding Conditional Control to Text-to-Image Diffusion Models,” in 2023 IEEE/CVF International Conference on Computer Vision (ICCV), Oct. 2023, pp. 3813–3824. doi: 10.1109/ICCV51070.2023.00355.
-
+<br>
 [9]	O. Bar-Tal, L. Yariv, Y. Lipman, and T. Dekel, “MultiDiffusion: Fusing Diffusion Paths for Controlled Image Generation,” Feb. 16, 2023, arXiv: arXiv:2302.08113. Accessed: Sep. 26, 2024. [Online]. Available: http://arxiv.org/abs/2302.08113
-
+<br>
 [10]	F.-A. Croitoru, V. Hondru, R. T. Ionescu, and M. Shah, “Diffusion Models in Vision: A Survey,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 45, no. 9, pp. 10850–10869, Sep. 2023, doi: 10.1109/TPAMI.2023.3261988.
-
+<br>
 [11]	“Imageye - Image Downloader.” Accessed: Oct. 07, 2024. [Online]. Available: https://www.imageye.net/
 
 <br><br>
