@@ -49,21 +49,21 @@ Diffusion models [1] have realized excellent performance in computer vision, wit
 <h3>Approach</h3>
 <!-- Figure 1 --> 
 <figure>
-  <img style="height: 300px;" alt="" src="diffusion_process.png">
+  <img alt="" src="diffusion_process.png">
   <figcaption>Figure 1. Forward and reverse process of denoising diffusion probabilistic models [10].</figcaption>
 </figure>
 Diffusion models are typically modeled as a combination of a forward and a reverse process. While multiple formulations of diffusion models exist, we focus primarily on denoising diffusion probabilistic models (DDPMs), one of the more popular variants of diffusion models [10]. Under the DDPM framework, the forward step consists of repeatedly adding Gaussian noise to an image across multiple time steps until the resulting image is indistinguishable from Gaussian noise. The reverse (generative) process attempts to estimate and remove the noise from the image at each time step using a neural network.
 
 <br><br>
 <figure>
-  <img style="height: 400px;" alt="" src="multidiffusion.png">
+  <img alt="" src="multidiffusion.png">
   <figcaption>Figure 2. MultiDiffusion image generation from masks [9]. </figcaption>
 </figure>
 
 The MultiDiffusion pipeline unifies multiple segmentations in a single diffusion generation [9]. In Figure 2 above, segmentation masks are provided for individual image components. In this example, the background mask is associated with the text prompt “blurred image”, while the two foreground masks are associated with “a mouse” and “a pile of books”, respectively. By training a new generation process on top of a pre-trained, frozen diffusion model, the authors of the MultiDiffusion paper can generate images such as the one in Figure 2, where a mouse is sitting on a pile of books in a visually consistent manner, in the locations specified by the segmentation masks.
 <br><br>
 <figure>
-  <img style="height: 300px;" alt="" src="controlnet.png">
+  <img alt="" src="controlnet.png">
   <figcaption>Figure 3. ControlNet image generation from Canny edge input [8]. </figcaption>
 </figure>
 
@@ -71,7 +71,7 @@ By specifying additional conditioning controls and using trainable copies of dif
 <br><br>
 
 <figure>
-  <img style="height: 300px;" alt="" src="proposed.png">
+  <img alt="" src="proposed.png">
   <figcaption>Figure 4. Proposed pipeline combining ControlNet control strategy with MultiDiffusion image generation. </figcaption>
 </figure>
 By combining Canny edge conditioning from ControlNet with the multiple image segmentation masks approach of MultiDiffusion, we propose creating a pipeline that can dynamically produce multiple highly controllable generations in a single visually coherent image (Figure 4).
