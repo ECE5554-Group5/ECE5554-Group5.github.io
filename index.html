@@ -42,8 +42,7 @@ color: #FF9900;
 
 <!-- Goal -->
 <h3>Problem Statement</h3>
-Diffusion models [1] have realized excellent performance in computer vision, with generative applications ranging from human image generation [2] to optical illusions [3], [4] and multimodal generation [5]. Additionally, the surging popularity of commercial applications such as DALL-E2 [6] and Midjourney [7] have catapulted diffusion models into the public eye. While diffusion models can produce highly realistic generation results, they can be difficult to explicitly direct due to the stochastic nature of the sampling process. In this work, we seek to realize increased control over generated image subcomponents by incorporating Canny Edge conditioning strategies from ControlNet [8] into the MultiDiffusion [9] generation pipeline.
-
+Diffusion models [1] have realized excellent performance in generative computer vision tasks, ranging from human image generation [2] to optical illusions [3], [4] and multimodal generation [5]. With the surging popularity of commercial applications such as DALL-E2 [6] and Midjourney [7] diffusion models have been catapulted into the public eye. While diffusion models are capable of generating high-quality images and video, they can be difficult to direct due to the stochastic nature of the sampling process and ambiguity in the prompts provided. In this work, we seek to realize increased control over generated image subcomponents by incorporating Canny Edge conditioning strategies from ControlNet [8] into the MultiDiffusion [9] generation pipeline. 
 <br><br>
 <!-- Approach -->
 <h3>Approach</h3>
@@ -60,25 +59,47 @@ Diffusion models are typically modeled as a combination of a forward and a rever
   <figcaption>Figure 2. MultiDiffusion image generation from masks [9]. </figcaption>
 </figure>
 
-The MultiDiffusion pipeline unifies multiple segmentations in a single diffusion generation [9]. In Figure 2 above, segmentation masks are provided for individual image components. In this example, the background mask is associated with the text prompt “blurred image”, while the two foreground masks are associated with “a mouse” and “a pile of books”, respectively. By training a new generation process on top of a pre-trained, frozen diffusion model, the authors of the MultiDiffusion paper can generate images such as the one in Figure 2, where a mouse is sitting on a pile of books in a visually consistent manner, in the locations specified by the segmentation masks.
+The MultiDiffusion pipeline unifies multiple segmentations into a single diffusion generation [9]. In Figure 2 above, segmentation masks are provided for individual image components. In this example, the background mask is associated with the text prompt “blurred image”, while the two foreground masks are associated with “a mouse” and “a pile of books”, respectively. By training a new generation process on top of a pre-trained, frozen diffusion model, MultiDiffusion can generate visually consistent images provided the structure of the segmentation masks, such as in Figure 2. 
 <br><br>
 <figure>
   <img alt="" src="controlnet.png">
   <figcaption>Figure 3. ControlNet image generation from Canny edge input [8]. </figcaption>
 </figure>
 
-By specifying additional conditioning controls and using trainable copies of diffusion models, ControlNet can produce highly specific images [8]. Given an input Canny edge, the ControlNet model learns to produce outputs that closely match, even when conditioned with additional text prompts (Figure 3).
+Conditional control architectures, such as ControlNet, on the other hand, can control diffusion models with various spatially localized input conditions, including Canny edges or human pose estimations, to produce highly specific output images that closely resemble one another, even when conditioned with additional text prompts [8] (Figure 3).   
 <br><br>
 
 <figure>
   <img alt="" src="proposed.png">
   <figcaption>Figure 4. Proposed pipeline combining ControlNet control strategy with MultiDiffusion image generation. </figcaption>
 </figure>
-By combining Canny edge conditioning from ControlNet with the multiple image segmentation masks approach of MultiDiffusion, we propose creating a pipeline that can dynamically produce multiple highly controllable generations in a single visually coherent image (Figure 4).
+We propose a pipeline that combines Canny edge conditioning from ControlNet with the multiple image segmentation masks approach of MultiDiffusion, to dynamically produce multiple highly controllable generations in a single visually coherent image (Figure 4). 
 <br><br>
 
 <!-- Plan for Experiments -->
 <h3>Plan for Experiments</h3>
+<h4>Code</h4>
+Both MultiDiffusion and ControlNet are designed to enhance the capabilities of pretrained Stable Diffusion models. In this work, we’ll experiment with a variety of baseline models but will likely use the <a href="https://huggingface.co/stabilityai/stable-diffusion-2">Stable Diffusion 2</a> model from Stability AI due to its popularity. Additionally, as open-source implementations of both MultiDiffusion and ControlNet are available, we intend to leverage these in our solution. However, we will implement code combining these two approaches ourselves. 
+<h4>Data Collection</h4>
+Because we’re working with a pretrained model, significantly less data is required compared to training a model from scratch. However, we will still need to collect images to finetune our networks with, so we intend to use a tool such as Imageye [11] to download large quantities of images from Google Images. Alternatively, we may also explore making use of existing image datasets such as COCO or LAION. 
+<h4>Experiments</h4>
+Our experiments will consist of multiple output generations using our proposed pipeline. In general, output images should be visually consistent and reflective of both the input Canny edges and segmentation masks. 
+
+<h5>Functionality Validation</h5>
+We will provide at least two Canny edge inputs to our pipeline to generate a single image. Our model is successful if: 
+<ol>
+  <li>The output is controllable: For each distinct Canny edge input/segmentation mask, 90% of the input edges are accounted for by the Canny edge version of the corresponding region in the output image. Visual inspection should confirm that the output reflects the original Canny edge input. </li>
+  <li>The output is visually consistent: Visual inspection should confirm the output appears as one cohesive image with similar visual theming, lighting, and color grading throughout, rather than multiple images from different sources being joined together.  </li>
+</ol>
+
+<h5>Performance Comparison</h5>
+We will test the results of our proposed pipeline against MultiDIffusion outputs without ControlNet features by comparing the visual consistency, time, and adherence to prompts. We aim to achieve improved performance compared to MultiDiffusion generations not enhanced with ControlNet Canny features.  
+
+<h5>Stress Testing</h5>
+To further understand the limitations of our proposed pipeline, we will attempt to find the lower limit on the size of the masks & the upper limit on the number of masks per image prior to breakdown of image quality caused by generations visually appearing significantly different from input Canny edges. 
+
+<h5>Influence of Dataset Sizes</h5>
+As in [8], we will explore the effect of decreasing training dataset size on the generation of recognizable images. We anticipate that our pipeline will achieve a similar breakdown point to the baseline ControlNet training. 
 
 <br><br>
 
