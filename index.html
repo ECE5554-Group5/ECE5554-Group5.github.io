@@ -189,34 +189,32 @@ Figure&nbsp;4: Proposed pipeline combining ControlNet control strategy with Mult
 <p>The goal of our pipeline is to be able to fuse diffusion paths from two or more segmentation masks, each with their own Canny input. The resulting generations should appear visually consistent and reflect the original Canny edge inputs.</p>
 <section id="borrowed-code" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="borrowed-code"><span class="header-section-number">3.1</span> Borrowed Code</h2>
-<p>Both MultiDiffusion and ControlNet are designed to enhance the capabilities of pretrained Stable Diffusion models. In this work, we’ll experiment with a variety of baseline models but will likely use the Stable Diffusion 2 model from Stability AI. Additionally, as open-source implementations of both MultiDiffusion and ControlNet are available, we intend to leverage these in our solution. However, we will implement code combining these two approaches ourselves.</p>
+<p>Both MultiDiffusion and ControlNet are designed to enhance the capabilities of pretrained Stable Diffusion models. In this work, we’ll experiment with a variety of baseline models but will likely use the <a href="https://huggingface.co/stabilityai/stable-diffusion-2">Stable Diffusion 2</a> model from Stability AI due to its popularity. Additionally, as open-source implementations of both MultiDiffusion and ControlNet are available, we intend to leverage these in our solution. However, we will implement code combining these two approaches ourselves.</p>
 </section>
 <section id="data-collection" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="data-collection"><span class="header-section-number">3.2</span> Data Collection</h2>
-<p>Because we’re working with a pretrained model, significantly less data is required compared to training a model from scratch. However, we will still need to collect images to finetune our networks with, so we intend to use a tool such as Imageye <span class="citation" data-cites="ImageyeImageDownloader">[<a href="#ref-ImageyeImageDownloader" role="doc-biblioref">11</a>]</span> to download large quantities of images from Google Images.</p>
+<p>Because we’re working with a pretrained model, significantly less data is required compared to training a model from scratch. However, we will still need to collect images to finetune our networks with, so we intend to use a tool such as Imageye <span class="citation" data-cites="ImageyeImageDownloader">[<a href="#ref-ImageyeImageDownloader" role="doc-biblioref">11</a>]</span> to download large quantities of images from Google Images. Alternatively, we may also explore making use of existing image datasets such as the Common Objects in Context (COCO) dataset or one of the Large-scale Artificial Intelligence Open Network (LAION) datasets.</p>
 </section>
 <section id="experiments" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="experiments"><span class="header-section-number">3.3</span> Experiments</h2>
-<p>Our experiments will consist of multiple output generations using our proposed pipeline. Output images should be visually consistent and reflective of both the input Canny edges and segmentation masks.</p>
-<section id="performance-comparison" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="performance-comparison"><span class="header-section-number">3.3.1</span> Performance Comparison</h3>
-<p>We will test the results of our proposed pipeline against several State-of-the-Art (SotA) setups by comparing the visual consistency and resilience against prompt-bias. We anticipate comparable performance to most SotA models, with gains in the overall visual consistency of the images and controllability of image generation.</p>
+<p>Our experiments will consist of multiple output generations using our proposed pipeline. In general, output images should be visually consistent and reflective of both the input Canny edges and segmentation masks.</p>
+<section id="functionality-validation" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="functionality-validation"><span class="header-section-number">3.3.1</span> Functionality Validation</h3>
+<p>We will provide at least two Canny edge inputs to our pipeline to generate a single image. Our model is successful if: 1. The output is controllable: For each distinct Canny edge input/segmentation mask, 90% of the input edges are accounted for by the Canny edge version of the corresponding region in the output image. Visual inspection should confirm that the output reflects the original Canny edge input. 2. The output is visually consistent: Visual inspection should confirm the output appears as one cohesive image with similar visual theming, lighting, and color grading throughout, rather than multiple images from different sources being joined together.</p>
 </section>
-<section id="stress-testing" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="stress-testing"><span class="header-section-number">3.3.2</span> Stress Testing</h3>
-<p>To further understand the limitations of our proposed pipeline, we will attempt to find the lower limit on the size of the masks &amp; the upper limit on the number of masks per image prior to the breakdown of image quality.</p>
+<section id="performance-comparison" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="performance-comparison"><span class="header-section-number">3.3.2</span> Performance Comparison</h3>
+<p>We will test the results of our proposed pipeline against MultiDIffusion outputs without ControlNet features by comparing the visual consistency, time, and adherence to prompts. We aim to achieve improved performance compared to MultiDiffusion generations not enhanced with ControlNet Canny features.</p>
 </section>
-<section id="influence-of-dataset-sizes" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="influence-of-dataset-sizes"><span class="header-section-number">3.3.3</span> Influence of Dataset sizes</h3>
-<p>As in Zheng et al (2023)<span class="citation" data-cites="zhangAddingConditionalControl2023a">[<a href="#ref-zhangAddingConditionalControl2023a" role="doc-biblioref">8</a>]</span>, we will explore the effect of decreasing training dataset size on the generation of recognizable images. We anticipate that our pipeline will outperform baseline ControlNet training with the training will collapse at &lt;1K images.</p>
+<section id="stress-testing" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="stress-testing"><span class="header-section-number">3.3.3</span> Stress Testing</h3>
+<p>To further understand the limitations of our proposed pipeline, we will attempt to find the lower limit on the size of the masks &amp; the upper limit on the number of masks per image prior to breakdown of image quality caused by generations visually appearing significantly different from input Canny edges.</p>
 </section>
-<section id="ambiguous-content-generation" class="level3" data-number="3.3.4">
-<h3 data-number="3.3.4" class="anchored" data-anchor-id="ambiguous-content-generation"><span class="header-section-number">3.3.4</span> Ambiguous Content Generation</h3>
-<p>We will test our ControlNet+MultiDiffusion pipeline on ambiguous input. Given the theoretical gains in both versatility and controllability of our model, we anticipate the generation of versitile, high-quality images from even minimal structure.</p>
-</section>
-<section id="ablative-study" class="level3" data-number="3.3.5">
-<h3 data-number="3.3.5" class="anchored" data-anchor-id="ablative-study"><span class="header-section-number">3.3.5</span> Ablative study</h3>
-<p>To study the contributions of each component of our pipeline, we will compare the results of our pipeline to the baseline ControlNet &amp; MultiDiffusion setups. We expect improvements in visual consitency, versatility, and quality for our pipeline compared to baseline approaches.</p>
+<section id="influence-of-dataset-sizes" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="influence-of-dataset-sizes"><span class="header-section-number">3.3.4</span> Influence of Dataset sizes</h3>
+<p>As in Zheng et al (2023)<span class="citation" data-cites="zhangAddingConditionalControl2023a">[<a href="#ref-zhangAddingConditionalControl2023a" role="doc-biblioref">8</a>]</span>, we will explore the effect of decreasing training dataset size on the generation of recognizable images. We anticipate that our pipeline will achieve a similar breakdown point to the baseline ControlNet training.</p>
+<!-- ### Ambiguous Content Generation
+We will test our ControlNet+MultiDiffusion pipeline on ambiguous input. Given the theoretical gains in both versatility and controllability of our model, we anticipate the generation of versitile, high-quality images from even minimal structure. -->
 
 </section>
 </section>

@@ -56,27 +56,30 @@ The goal of our pipeline is to be able to fuse diffusion paths from two or more 
 
 ## Borrowed Code 
 
-Both MultiDiffusion and ControlNet are designed to enhance the capabilities of pretrained Stable Diffusion models. In this work, we’ll experiment with a variety of baseline models but will likely use the Stable Diffusion 2 model from Stability AI. Additionally, as open-source implementations of both MultiDiffusion and ControlNet are available, we intend to leverage these in our solution. However, we will implement code combining these two approaches ourselves. 
+Both MultiDiffusion and ControlNet are designed to enhance the capabilities of pretrained Stable Diffusion models. In this work, we’ll experiment with a variety of baseline models but will likely use the [Stable Diffusion 2](https://huggingface.co/stabilityai/stable-diffusion-2) model from Stability AI due to its popularity. Additionally, as open-source implementations of both MultiDiffusion and ControlNet are available, we intend to leverage these in our solution. However, we will implement code combining these two approaches ourselves. 
 
 ## Data Collection 
 
-Because we’re working with a pretrained model, significantly less data is required compared to training a model from scratch. However, we will still need to collect images to finetune our networks with, so we intend to use a tool such as Imageye [@ImageyeImageDownloader] to download large quantities of images from Google Images. 
+Because we’re working with a pretrained model, significantly less data is required compared to training a model from scratch. However, we will still need to collect images to finetune our networks with, so we intend to use a tool such as Imageye [@ImageyeImageDownloader] to download large quantities of images from Google Images. Alternatively, we may also explore making use of existing image datasets such as the Common Objects in Context (COCO) dataset or one of the Large-scale Artificial Intelligence Open Network (LAION) datasets.
 
 ## Experiments
 
-Our experiments will consist of multiple output generations using our proposed pipeline. Output images should be visually consistent and reflective of both the input Canny edges and segmentation masks.
+Our experiments will consist of multiple output generations using our proposed pipeline. In general, output images should be visually consistent and reflective of both the input Canny edges and segmentation masks. 
+
+### Functionality Validation 
+
+We will provide at least two Canny edge inputs to our pipeline to generate a single image. Our model is successful if: 
+1. The output is controllable: For each distinct Canny edge input/segmentation mask, 90% of the input edges are accounted for by the Canny edge version of the corresponding region in the output image. Visual inspection should confirm that the output reflects the original Canny edge input. 
+2. The output is visually consistent: Visual inspection should confirm the output appears as one cohesive image with similar visual theming, lighting, and color grading throughout, rather than multiple images from different sources being joined together.  
 
 ### Performance Comparison
-We will test the results of our proposed pipeline against several State-of-the-Art (SotA) setups by comparing the visual consistency and resilience against prompt-bias. We anticipate comparable performance to most SotA models, with gains in the overall visual consistency of the images and controllability of image generation.
+We will test the results of our proposed pipeline against MultiDIffusion outputs without ControlNet features by comparing the visual consistency, time, and adherence to prompts. We aim to achieve improved performance compared to MultiDiffusion generations not enhanced with ControlNet Canny features.
 
 ### Stress Testing
-To further understand the limitations of our proposed pipeline, we will attempt to find the lower limit on the size of the masks & the upper limit on the number of masks per image prior to the breakdown of image quality. 
+To further understand the limitations of our proposed pipeline, we will attempt to find the lower limit on the size of the masks & the upper limit on the number of masks per image prior to breakdown of image quality caused by generations visually appearing significantly different from input Canny edges. 
 
 ### Influence of Dataset sizes 
-As in Zheng et al (2023)[@zhangAddingConditionalControl2023a], we will explore the effect of decreasing training dataset size on the generation of recognizable images. We anticipate that our pipeline will outperform baseline ControlNet training with the training will collapse at <1K images.
+As in Zheng et al (2023)[@zhangAddingConditionalControl2023a], we will explore the effect of decreasing training dataset size on the generation of recognizable images. We anticipate that our pipeline will achieve a similar breakdown point to the baseline ControlNet training.
 
-### Ambiguous Content Generation
-We will test our ControlNet+MultiDiffusion pipeline on ambiguous input. Given the theoretical gains in both versatility and controllability of our model, we anticipate the generation of versitile, high-quality images from even minimal structure.
-
-### Ablative study
-To study the contributions of each component of our pipeline, we will compare the results of our pipeline to the baseline ControlNet & MultiDiffusion setups. We expect improvements in visual consitency, versatility, and quality for our pipeline compared to baseline approaches.
+<!-- ### Ambiguous Content Generation
+We will test our ControlNet+MultiDiffusion pipeline on ambiguous input. Given the theoretical gains in both versatility and controllability of our model, we anticipate the generation of versitile, high-quality images from even minimal structure. -->
