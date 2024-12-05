@@ -24,44 +24,29 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
 }
-</style>
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -105,10 +90,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -163,11 +188,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#approach" id="toc-approach" class="nav-link" data-scroll-target="#approach"><span class="header-section-number">2</span> Approach</a>
+  <ul class="collapse">
+  <li><a href="#theory" id="toc-theory" class="nav-link" data-scroll-target="#theory"><span class="header-section-number">2.1</span> Theory</a></li>
+  </ul></li>
+  <li><a href="#experiments-and-results" id="toc-experiments-and-results" class="nav-link" data-scroll-target="#experiments-and-results"><span class="header-section-number">3</span> Experiments and Results</a>
+  <ul class="collapse">
+  <li><a href="#parameter-effects" id="toc-parameter-effects" class="nav-link" data-scroll-target="#parameter-effects"><span class="header-section-number">3.1</span> Parameter Effects</a></li>
+  <li><a href="#qualitative-results" id="toc-qualitative-results" class="nav-link" data-scroll-target="#qualitative-results"><span class="header-section-number">3.2</span> Qualitative Results</a></li>
+  <li><a href="#quantitative-experimental-arrangement" id="toc-quantitative-experimental-arrangement" class="nav-link" data-scroll-target="#quantitative-experimental-arrangement"><span class="header-section-number">3.3</span> Quantitative Experimental Arrangement</a></li>
+  <li><a href="#quantitative-results" id="toc-quantitative-results" class="nav-link" data-scroll-target="#quantitative-results"><span class="header-section-number">3.4</span> Quantitative Results</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">4</span> Conclusion</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -176,7 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
-<div class="quarto-title-meta-author column-page-right">
+<div class="quarto-title-meta-author column-body">
   <div class="quarto-title-meta-heading">Authors</div>
   <div class="quarto-title-meta-heading">Affiliation</div>
   
@@ -206,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
   </div>
 
-<div class="quarto-title-meta column-page-right">
+<div class="quarto-title-meta column-body">
 
       
     <div>
@@ -222,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    <p>Diffusion models have realized excellent performance in generative computer vision tasks, and emerging frameworks like ControlNet and MultiDiffusion further improve control over image generation. In this work, we seek to incorporate Canny Edge conditioning strategies from ControlNet into the MultiDiffusion generation pipeline, enabling cohesive image generation from multiple independent diffusion processes with highly specific spatial conditioning. We implemented this new framework by [methods summary]. The compound model could generate visually cohesive images with multiple Canny Edge input masks. Moreover, [quantitative results summary].</p>
+    <p>Diffusion models have realized excellent performance in generative computer vision tasks. Classifier-free guidance frameworks like ControlNet and MultiDiffusion further improve control over image generation by incorporating conditioning information into the generation process. In this work, we seek to incorporate Canny Edge conditioning strategies from ControlNet into the MultiDiffusion generation pipeline, enabling cohesive image generation from multiple independent diffusion processes using specific spatial conditioning. The resulting framework, which we have termed MultiControl, generates visually cohesive images incorporating multiple distinct Canny Edge controls. Moreover, [quantitative results summary]. We also provide details of our PyTorch implementation of this new framework, incorporating strategies from existing ControlNet and MultiDiffusion codebases.</p>
   </div>
 </div>
 
@@ -230,6 +273,322 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div id="fig-summary" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig5.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>Diffusion models <span class="citation" data-cites="sohl-dicksteinDeepUnsupervisedLearning2015">[<a href="#ref-sohl-dicksteinDeepUnsupervisedLearning2015" role="doc-biblioref">1</a>]</span> realize excellent performance in generative computer vision (CV) tasks, ranging from human image generation <span class="citation" data-cites="kumarbhuniaPersonImageSynthesis2023">[<a href="#ref-kumarbhuniaPersonImageSynthesis2023" role="doc-biblioref">2</a>]</span> to optical illusion formation <span class="citation" data-cites="gengVisualAnagramsGenerating2024">[<a href="#ref-gengFactorizedDiffusionPerceptual2024" role="doc-biblioref">4</a>]</span>, to multimodal generation <span class="citation" data-cites="chenImagesThatSound2024">[<a href="#ref-chenImagesThatSound2024" role="doc-biblioref">5</a>]</span>. The success of commercial applications such as DALL-E2 <span class="citation" data-cites="DALLE">[<a href="#ref-DALLE" role="doc-biblioref">6</a>]</span> and Midjourney <span class="citation" data-cites="Midjourney">[<a href="#ref-Midjourney" role="doc-biblioref">7</a>]</span> demonstrate the demand for this emerging technology.</p>
+<p>Diffusion Models (DMs) typically combine a forward and a reverse process (<a href="#fig-diffusion" class="quarto-xref">Figure&nbsp;2</a>). In Denoising Diffusion Probabilistic Models (DDPMs), one of the more popular variants of diffusion models <span class="citation" data-cites="croitoruDiffusionModelsVision2023">[<a href="#ref-croitoruDiffusionModelsVision2023" role="doc-biblioref">8</a>]</span>, the forward step consists of repeatedly adding Gaussian noise to an image across multiple time steps until the resulting image is indistinguishable from Gaussian noise. The reverse (generative) process attempts to estimate and remove the noise from the image at each time step using a Neural Network (NN). This NN is trained on images generated from applying the forward process to hundreds of millions of images<span class="citation" data-cites="croitoruDiffusionModelsVision2023">[<a href="#ref-croitoruDiffusionModelsVision2023" role="doc-biblioref">8</a>]</span>. During inference, new images can be generated by repeatedly denoisifying Gaussian noise, resulting in an image that appears to have been sampled from the training dataset.</p>
+<div id="fig-diffusion" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diffusion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diffusion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Forward and reverse process of denoising diffusion probabilistic models <span class="citation" data-cites="croitoruDiffusionModelsVision2023">[<a href="#ref-croitoruDiffusionModelsVision2023" role="doc-biblioref">8</a>]</span>
+</figcaption>
+</figure>
+</div>
+<p>Diffusion models are widely considered state-of-the-art for textually conditioned image generation <span class="citation" data-cites="bar-talMultiDiffusionFusingDiffusion2023">[<a href="#ref-bar-talMultiDiffusionFusingDiffusion2023" role="doc-biblioref">9</a>]</span>, in which a text prompt is fed into the model to direct the output generation process. However, spatial control remains challenging, even for state-of-the-art pre-trained diffusion models <span class="citation" data-cites="zhangAddingConditionalControl2023a">[<a href="#ref-zhangAddingConditionalControl2023a" role="doc-biblioref">10</a>]</span>, in part due to the stochastic nature of the sampling process.</p>
+<p>Recent literature proposes incorporating spatial conditioning into the diffusion model generation process. One such framework is MultiDiffusion (MD), which unifies multiple segmentations into a single diffusion generation <span class="citation" data-cites="bar-talMultiDiffusionFusingDiffusion2023">[<a href="#ref-bar-talMultiDiffusionFusingDiffusion2023" role="doc-biblioref">9</a>]</span>. The key generation process starts from a noise generation step, after which the model will follow each crop as closely as possible to its denoised version <a href="#fig-noise" class="quarto-xref">Figure&nbsp;3 (b)</a>. This can be used for region-based generation by providing distinct segmentation masks and text prompts to produce a single cohesive result <a href="#fig-segmentation" class="quarto-xref">Figure&nbsp;11 (a)</a>. By building a new generation process on top of a pre-trained, frozen diffusion model, MD can generate visually consistent images incorporating independent, spatially defined image components.</p>
+<div id="fig-multidiffusion" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-multidiffusion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-multidiffusion" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-segmentation" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-segmentation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig2.png" class="img-fluid figure-img" style="width:50.0%" data-ref-parent="fig-multidiffusion">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-segmentation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) A background mask associated with the text prompt “blurred image” &amp; two foreground masks are associated with “a mouse” and a “pile of books”, respectively, are used to generate a cohesive final result
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-multidiffusion" style="flex-basis: 100.0%;justify-content: flex-start;">
+<div id="fig-noise" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/multidiffusion.jpg" class="img-fluid figure-img" style="width:90.0%" data-ref-parent="fig-multidiffusion">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-noise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Multidiffusion optimization procedure
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-multidiffusion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: MultiDiffusion image generation from segmentation masks<span class="citation" data-cites="bar-talMultiDiffusionFusingDiffusion2023">[<a href="#ref-bar-talMultiDiffusionFusingDiffusion2023" role="doc-biblioref">9</a>]</span>
+</figcaption>
+</figure>
+</div>
+<p>ControlNet (CN) is another pipeline that can control diffusion models with spatially localized input conditions. CN leverages an extra NN that modifies the behavior of a pre-trained, frozen diffusion model. This separate NN can be trained on datasets with spatial input conditions, including Canny edges, human pose estimations, or normal maps, to produce highly controlled output images. Moreover, this extra NN architecture can be trained on a limited dataset (e.g.&nbsp;100K images), which cannot be done with the original pre-trained model due to over-fitting and catastrophic forgetting <span class="citation" data-cites="zhangAddingConditionalControl2023a">[<a href="#ref-zhangAddingConditionalControl2023a" role="doc-biblioref">10</a>]</span>. As shown in <a href="#fig-controlnet" class="quarto-xref">Figure&nbsp;4</a>, the resulting pipeline can generate images with specific spatial features, even when provided with distinct text prompts.</p>
+<div id="fig-controlnet" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-controlnet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig3.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-controlnet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: ControlNet image generation from Canny edge input<span class="citation" data-cites="zhangAddingConditionalControl2023a">[<a href="#ref-zhangAddingConditionalControl2023a" role="doc-biblioref">10</a>]</span>
+</figcaption>
+</figure>
+</div>
+<p>Although the CN framework enables specific spatial input conditions, individual image components cannot be specified with distinct text prompts. On the other hand, the MD pipeline can generate a single consistent image from multiple independent text prompts and segmentation masks, but the individual image components are not generated with the same specificity as CN. In this work, we seek to realize increased control over generated image subcomponents by incorporating Canny Edge conditioning strategies from CN into the MD generation pipeline.</p>
+</section>
+<section id="approach" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Approach</h1>
+<p>To implement the new pipeline, which we have termed MultiControl, we combined the core MultiDiffusion logic and sampling approach with conditioning information from ControlNet.</p>
+<section id="theory" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="theory"><span class="header-section-number">2.1</span> Theory</h2>
+<p>Given image space <span class="math inline">\mathcal{I}</span> and condition space <span class="math inline">\mathcal{Y}</span> (eg. the text prompts) a pre-trained DM in the MD framework is represented by the mapping <span class="math display">
+\Phi : \mathcal{I} \times \mathcal{Y} \longrightarrow \mathcal{I} \ \text{s.t.} \ y \in \mathcal{Y} \ \&amp; \ I_{t} \in \mathcal{I}
+</span></p>
+<p>Starting from noisy image <span class="math inline">I_{T}</span> the generative process, at each time step <span class="math inline">t</span> obstains the next denoised image as <span id="eq-generative-process"><span class="math display">
+I_{t-1} = \Phi(I_{t} | y)
+\tag{1}</span></span></p>
+<p>eventually ending into a clean image <span class="math inline">I_{0}</span>.</p>
+<p>The MD framework fuses multiple diffusion processes by defining a global process over global image space <span class="math inline">\mathcal{J}</span> and global condition space <span class="math inline">\mathcal{Z}</span>, which reflects the individual diffusion processes as much as possible. Specifically, it works by applying the diffusion model multiple times across different views of the image.</p>
+<p>The global process, termed the MultiDiffusion process, is defined as <span class="math display">
+\Psi = \mathcal{J} \times \mathcal{Z} \longrightarrow \mathcal{J} \ \text{s.t.} \ J_{t} \in \mathcal{J} \ \&amp; \ z \in \mathcal{Z}
+</span></p>
+<p>For each <span class="math inline">i</span>th diffusion process, mappings are defined from the global image and conditon condition spaces to I and Y. An optimization is then performed to ensure the output of each MultiDiffuser step, <span class="math inline">J_{t-1} = \Psi(J_{t}|z)</span> is similar to the output of the pretrained diffusion model (<a href="#eq-generative-process" class="quarto-xref">Equation&nbsp;1</a>).</p>
+<p>Our key contribution is to seamlessly incorporate the CN model into this generation process. We demonstrate the effectiveness of our approach using a region-based text-to-image-generation setup, inspired by section 4.2 of the MultiDiffusion paper <span class="citation" data-cites="bar-talMultiDiffusionFusingDiffusion2023">[<a href="#ref-bar-talMultiDiffusionFusingDiffusion2023" role="doc-biblioref">9</a>]</span>. Under the MultiControl framework, the image space remains unchanged, but we modify the condition space by including not only text prompts but also Canny Edges. These are fed to the pre-trained ControlNet model to generate conditioning information, which can then be fed into the pre-trained diffusion model along with the textual conditioning information. This allows us to synthesize multiple spatially controllable diffusion processes into a single global MultiControl process.</p>
+<p>We built our code using components from the <a href="https://github.com/lllyasviel/ControlNet">ControlNet repository</a>, and the <a href="https://github.com/omerbt/MultiDiffusion">MultiDiffusion repository</a>. Our code-base (zipped and attached) is a minimal fork of the ControlNet repository. To run our pipeline, we implemented a new gradio script, <code>gradio_multicontrol.py</code>, which presents a UI to upload images and prompts for the subcomponents and background (<a href="#fig-gradio" class="quarto-xref">Figure&nbsp;5</a>).</p>
+<div id="fig-gradio" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gradio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/gradio.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gradio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: MultiControl <code>gradio</code> application
+</figcaption>
+</figure>
+</div>
+<p>Each image is then processed using the <code>cv2.Canny()</code> module to generate the Canny Edge inputs used for spatial conditioning. We also automatically generate image masks to specify bounded regions for each image subcomponent. To combine the textual and spatial conditions, we use a pre-trained ControlNet model taken from <a href="https://huggingface.co/lllyasviel/ControlNet/blob/main/models/control_sd15_canny.pth">HuggingFace</a> to generate combined conditioning information. After processing and packaging the input conditions, the application calls the <code>DDIMSampler</code> class in our <code>ddim_multi_hacked.py</code> script, which we modified from the <code>ddim_hacked.py</code> script in ControlNet. This script sets up the reverse process schedule and calls the underlying model at each time step to generate the next denoised image.</p>
+<p>We define our ControlLDM model wrapper in cldm.py, which is modified from the ControlNet repository and stores the core generation logic as well as the MD integration logic. Under the MD framework, we iterate over multiple views of the image to ensure visual consistency. For each view, we pass the prompt, Canny Edge conditions, and current latent to a pre-trained Stable Diffusion 1.5 checkpoint to generate and fuse the resulting generated outputs according to the MultiDiffusion approach.</p>
+</section>
+</section>
+<section id="experiments-and-results" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Experiments and Results</h1>
+<section id="parameter-effects" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="parameter-effects"><span class="header-section-number">3.1</span> Parameter Effects</h2>
+<p>In this section, we provide multiple examples detailing the behavior of our MultiControl approach under multiple stress tests. We also explore the effect of varying several algorithm parameters on the quality and visual consistency of our generation results. Early on in our generation process, we noticed that many generated images tended to be visually jarring in areas with small details and contrasting colors. To counteract this issue, we took inspiration from the original ControlNet implementation by introducing adaptive control scales, which allowed us to vary the conditioning weights associated with different layers of the diffusion model. In this project, we heavily reduced the control weight for inputs later in the Stable Diffusion network, allowing it to generate high quality images while remaining visually consistent with the controlled conditioning information introduced in earlier layers (<a href="#fig-cat-man-house" class="quarto-xref">Figure&nbsp;6</a>). .</p>
+<div id="fig-cat-man-house" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cat-man-house-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/cat-man-house.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cat-man-house-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: A comparison between adaptive and fixed control scales from the MultiControl approach.
+</figcaption>
+</figure>
+</div>
+<p>We also experimented with varying the number of timesteps used in the generation process (<a href="#fig-generation-time" class="quarto-xref">Figure&nbsp;7</a>). We found that modifying the number of timesteps resulted in a tradeoff between longer generation times and generation stability. At fewer than 5 timesteps, generation quality was relatively poor. Quality steadily increased until around 15 timesteps, after which additional timesteps realized diminishing returns. We also experimented with very long generation time frames (<span class="math inline">t=100</span>) to improve generations further but noticed significant blurring and color saturation.</p>
+<div id="fig-generation-time" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-generation-time-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/generation-time.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-generation-time-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Effect of generation time on image quality
+</figcaption>
+</figure>
+</div>
+<p>To verify the MultiControl framework’s performance quantitatively, we decided to compare its performance on a given test case against MD.</p>
+</section>
+<section id="qualitative-results" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="qualitative-results"><span class="header-section-number">3.2</span> Qualitative Results</h2>
+<p>When working with large controls, our MultiControl pipeline tends to produce high-quality visualizations. For example, in <a href="#fig-large-controls" class="quarto-xref">Figure&nbsp;8</a>, both foreground controls (the plane and the car) are closely mirrored in the generated image. Small details such as the airplane windows are captured precisely. Background features are consistent between the control and the resulting output.</p>
+<div id="fig-large-controls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-large-controls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/large-controls.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-large-controls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Large controls confer high-quality images
+</figcaption>
+</figure>
+</div>
+<p>Throughout testing, however, two key predictors of failure emerged – small controls and high numbers of controls. When conditioning on large numbers of controls, especially Canny Edges induced by smaller images, the level of detail decreases significantly. <a href="#fig-small-controls" class="quarto-xref">Figure&nbsp;9</a> shows four different input scenarios with varying numbers of controlled generations. In the leftmost image, a single, relatively large control is inserted into the image, resulting in a high-quality generation. Moving to the right, as more controls are added of decreasing size, conformance to the control canny edges decreases significantly. In the final example, with nine cats, three control images were placed in the top row of windows in the building. However, due to their small sizes, it is difficult to visually detect any cats in the top row of windows.</p>
+<div id="fig-small-controls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-small-controls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/large-controls.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-small-controls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Many smaller controls degrades image quality
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="quantitative-experimental-arrangement" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="quantitative-experimental-arrangement"><span class="header-section-number">3.3</span> Quantitative Experimental Arrangement</h2>
+<p>To quantitatively verify the performance of MultiControl, we compared its image generation against MD for the example shown in <a href="#fig-large-controls" class="quarto-xref">Figure&nbsp;8</a>. The individual input images are shown in <a href="#fig-experiment" class="quarto-xref">Figure&nbsp;10</a>.</p>
+<div id="fig-experiment" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-experiment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/quantitative-inputs.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-experiment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10
+</figcaption>
+</figure>
+</div>
+<p>To create a comparable generation using MultiDiffusion, we extracted the image masks created for MultiControl, shown in <a href="#fig-segmentation" class="quarto-xref">Figure&nbsp;11 (a)</a>. Having MD use these shaped segmentation masks is the closest approximation we had to the multiple spatial conditions of MultiControl.</p>
+<p>We generated images from both MultiControl and MultiDiffusion. For each output image, we extracted Canny Edges using the same thresholds that MultiControl used on the input images (100 and 200). We considered true edges as those in the Canny Edge image of the original car/plane image (<a href="#fig-canny-maps" class="quarto-xref">Figure&nbsp;11 (b)</a>). We considered predicted edges as those in the generated image. We considered correctly predicted edges as the predicted edges that matched the true edges. We considered these three edge types within the car and plane masks.</p>
+<div id="fig-maps" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-maps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="fig-segmentation" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-segmentation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/segmentation-maps.png" class="img-fluid figure-img" data-ref-parent="fig-maps">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-segmentation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Segmentation Maps
+</figcaption>
+</figure>
+</div>
+<div id="fig-canny-maps" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-canny-maps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/canny-edge-maps.png" class="img-fluid figure-img" data-ref-parent="fig-maps">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-canny-maps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Canny Edge Maps
+</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-maps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: Segmentation masks used by MultiControl and MD &amp; Canny edge maps used by MultiControl
+</figcaption>
+</figure>
+</div>
+<p>For each mask, we calculated two metrics. First, recall is the number of correctly predicted edges over the total number of true edges in the mask. Second, precision is the number of correctly predicted edges over the total number of predicted edges in the mask. If MultiControl produces higher recall and precision than MultiDiffusion, we can claim that MultiControl more closely matches the input spatial conditions during its image generation process than the baseline, MultiDiffusion.</p>
+</section>
+<section id="quantitative-results" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="quantitative-results"><span class="header-section-number">3.4</span> Quantitative Results</h2>
+<p><a href="#fig-MDvsMC" class="quarto-xref">Figure&nbsp;12 (a)</a> and <a href="#fig-MCvsMD-masks" class="quarto-xref">Figure&nbsp;12 (b)</a> show the output images and corresponding Canny Edge maps generated by MultiControl and MultiDiffusion. Table 1 lists the quantitative metrics, as described in the previous section.</p>
+<div id="fig-both" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-both-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="fig-MDvsMC" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-MDvsMC-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/MCvsMD.png" class="img-fluid figure-img" data-ref-parent="fig-both">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-MDvsMC-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) MultiControl (left) and MultiDiffusion (right) generation outputs.
+</figcaption>
+</figure>
+</div>
+<div id="fig-MCvsMD-masks" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-MCvsMD-masks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/MCvsMD-masks.png" class="img-fluid figure-img" data-ref-parent="fig-both">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-MCvsMD-masks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) MultiControl (left) and MultiDiffusion (right) output Canny Edge maps.
+</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-both-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12
+</figcaption>
+</figure>
+</div>
+<div id="tbl-results" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Caption MultiControl and MD Comparison of Recall and Precision for a Specific Test Case
+</figcaption>
+<div aria-describedby="tbl-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Input image</th>
+<th>Correctly Predicted Edges</th>
+<th>True Edges in Mask</th>
+<th>Predicted Edges in Mask</th>
+<th>Recall</th>
+<th>Precision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MultiControl</td>
+<td>Car</td>
+<td>1938</td>
+<td>7218</td>
+<td>5422</td>
+<td>26.85%</td>
+<td>35.74%</td>
+</tr>
+<tr class="even">
+<td>MultiDiffusion</td>
+<td>Car</td>
+<td>1042</td>
+<td>7218</td>
+<td>5363</td>
+<td>14.44%</td>
+<td>19.43%</td>
+</tr>
+<tr class="odd">
+<td>MultiControl</td>
+<td>Plane</td>
+<td>808</td>
+<td>2375</td>
+<td>3659</td>
+<td>34.02%</td>
+<td>22.08%</td>
+</tr>
+<tr class="even">
+<td>MultiDiffusion</td>
+<td>Plane</td>
+<td>344</td>
+<td>2375</td>
+<td>3861</td>
+<td>14.48%</td>
+<td>8.91%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>From <a href="#tbl-results" class="quarto-xref">Table&nbsp;1</a>, we see that MultiControl achieves higher precision and recall values for both foreground generations compared to MultiDiffusion. For the car image, MultiControl has 186% and 188% greater recall and precision, respectively. For the plane image, MultiControl has 235% and 248% greater recall and precision. This quantitatively demonstrates the improved effectiveness of our framework at incorporating spatial conditioning information into the generation process to produce more controllable generations.</p>
+</section>
+</section>
+<section id="conclusion" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Conclusion</h1>
+<p>This report has described a new integration of the MD and CN frameworks. By synthesizing independent ControlNet diffusion processes into one global MD process, we demonstrated visually consistent image generations that captured multiple spatial input conditions and prompts as image subcomponents.</p>
+<p>However, our MultiControl framework still has several areas for improvement. First, our gradio application expects images of the same overall dimensions. Future iterations should allow images of any size, then allow the user to change the scaling and positioning of foreground images on the background image. Moreover, we have not heavily tested cross-platform performance. Future work also includes incorporating other types of input spatial conditions like human pose estimation or normal maps into our code. This would be a relatively simple addition that would extend the applications of our work.</p>
 <div id="fig-demo" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-demo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -237,42 +596,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </iframe>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-demo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: A demonstrative application showcasing the <strong>MultiDiffusion</strong> + <strong>ControlNet</strong> Model
+Figure&nbsp;13: A demonstrative application showcasing the <strong>MultiDiffusion</strong> + <strong>ControlNet</strong> Model
 </figcaption>
 </figure>
 </div>
-<div id="e9ec38de" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cv2</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gradio <span class="im">as</span> gr</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> apply_canny(image):</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cv2.Canny(image,<span class="dv">100</span>,<span class="dv">200</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>interface <span class="op">=</span> gr.Interface(</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    fn<span class="op">=</span>apply_canny,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    inputs<span class="op">=</span>gr.Image(sources<span class="op">=</span>[<span class="st">'upload'</span>], <span class="bu">type</span><span class="op">=</span><span class="st">"numpy"</span>, label<span class="op">=</span><span class="st">"Input Image"</span>),</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    outputs<span class="op">=</span>gr.Image(<span class="bu">type</span><span class="op">=</span><span class="st">"numpy"</span>, label<span class="op">=</span><span class="st">"Input Image"</span>),</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># layout="horizontal"</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>interface.launch(inline<span class="op">=</span><span class="va">True</span>,show_api<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>* Running on local URL:  http://127.0.0.1:7861
-
-To create a public link, set `share=True` in `launch()`.</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div><iframe src="http://127.0.0.1:7861/" width="100%" height="500" allow="autoplay; camera; microphone; clipboard-read; clipboard-write;" frameborder="0" allowfullscreen=""></iframe></div>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code></code></pre>
-</div>
-</div>
 
 
 
-</main> <!-- /main -->
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-sohl-dicksteinDeepUnsupervisedLearning2015" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Sohl-Dickstein J, Weiss EA, Maheswaranathan N, Ganguli S (2015) <a href="https://arxiv.org/abs/1503.03585">Deep <span>Unsupervised Learning</span> using <span>Nonequilibrium Thermodynamics</span></a></div>
+</div>
+<div id="ref-kumarbhuniaPersonImageSynthesis2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Kumar Bhunia A, Khan S, Cholakkal H, et al (2023) <a href="https://doi.org/10.1109/CVPR52729.2023.00578">Person <span>Image Synthesis</span> via <span>Denoising Diffusion Model</span></a>. In: 2023 <span>IEEE</span>/<span>CVF Conference</span> on <span>Computer Vision</span> and <span>Pattern Recognition</span> (<span>CVPR</span>). IEEE, Vancouver, BC, Canada, pp 5968–5976</div>
+</div>
+<div id="ref-gengVisualAnagramsGenerating2024" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Geng D, Park I, Owens A (2024) <a href="https://doi.org/10.48550/arXiv.2311.17919">Visual <span>Anagrams</span>: <span>Generating Multi-View Optical Illusions</span> with <span>Diffusion Models</span></a></div>
+</div>
+<div id="ref-gengFactorizedDiffusionPerceptual2024" class="csl-entry" role="listitem">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Geng D, Park I, Owens A (2024) <a href="https://arxiv.org/abs/2404.11615">Factorized <span>Diffusion</span>: <span>Perceptual Illusions</span> by <span>Noise Decomposition</span></a></div>
+</div>
+<div id="ref-chenImagesThatSound2024" class="csl-entry" role="listitem">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Chen Z, Geng D, Owens A (2024) <a href="https://doi.org/10.48550/arXiv.2405.12221">Images that <span>Sound</span>: <span>Composing Images</span> and <span>Sounds</span> on a <span>Single Canvas</span></a></div>
+</div>
+<div id="ref-DALLE" class="csl-entry" role="listitem">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline"><span>DALL</span><span><span class="math inline">\cdot</span></span><span>E</span> 2</div>
+</div>
+<div id="ref-Midjourney" class="csl-entry" role="listitem">
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Midjourney. Midjourney</div>
+</div>
+<div id="ref-croitoruDiffusionModelsVision2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Croitoru F-A, Hondru V, Ionescu RT, Shah M (2023) Diffusion <span>Models</span> in <span>Vision</span>: <span>A Survey</span>. IEEE Transactions on Pattern Analysis and Machine Intelligence 45(9):10850–10869. <a href="https://doi.org/10.1109/TPAMI.2023.3261988">https://doi.org/10.1109/TPAMI.2023.3261988</a></div>
+</div>
+<div id="ref-bar-talMultiDiffusionFusingDiffusion2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Bar-Tal O, Yariv L, Lipman Y, Dekel T (2023) <a href="https://arxiv.org/abs/2302.08113"><span>MultiDiffusion</span>: <span>Fusing Diffusion Paths</span> for <span>Controlled Image Generation</span></a></div>
+</div>
+<div id="ref-zhangAddingConditionalControl2023a" class="csl-entry" role="listitem">
+<div class="csl-left-margin">10. </div><div class="csl-right-inline">Zhang L, Rao A, Agrawala M (2023) <a href="https://doi.org/10.1109/ICCV51070.2023.00355">Adding <span>Conditional Control</span> to <span class="nocase">Text-to-Image Diffusion Models</span></a>. In: 2023 <span>IEEE</span>/<span>CVF International Conference</span> on <span>Computer Vision</span> (<span>ICCV</span>). pp 3813–3824</div>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -693,7 +1057,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation column-page-right">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="./proposal.html" class="pagination-link" aria-label="Project Proposal">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Project Proposal</span>
