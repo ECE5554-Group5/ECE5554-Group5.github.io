@@ -192,18 +192,19 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#approach" id="toc-approach" class="nav-link active" data-scroll-target="#approach"><span class="header-section-number">1</span> Approach</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#approach" id="toc-approach" class="nav-link" data-scroll-target="#approach"><span class="header-section-number">2</span> Approach</a>
   <ul class="collapse">
-  <li><a href="#theory" id="toc-theory" class="nav-link" data-scroll-target="#theory"><span class="header-section-number">1.1</span> Theory</a></li>
+  <li><a href="#theory" id="toc-theory" class="nav-link" data-scroll-target="#theory"><span class="header-section-number">2.1</span> Theory</a></li>
   </ul></li>
-  <li><a href="#experiments-and-results" id="toc-experiments-and-results" class="nav-link" data-scroll-target="#experiments-and-results"><span class="header-section-number">2</span> Experiments and Results</a>
+  <li><a href="#experiments-and-results" id="toc-experiments-and-results" class="nav-link" data-scroll-target="#experiments-and-results"><span class="header-section-number">3</span> Experiments and Results</a>
   <ul class="collapse">
-  <li><a href="#parameter-effects" id="toc-parameter-effects" class="nav-link" data-scroll-target="#parameter-effects"><span class="header-section-number">2.1</span> Parameter Effects</a></li>
-  <li><a href="#qualitative-results" id="toc-qualitative-results" class="nav-link" data-scroll-target="#qualitative-results"><span class="header-section-number">2.2</span> Qualitative Results</a></li>
-  <li><a href="#quantitative-experimental-arrangement" id="toc-quantitative-experimental-arrangement" class="nav-link" data-scroll-target="#quantitative-experimental-arrangement"><span class="header-section-number">2.3</span> Quantitative Experimental Arrangement</a></li>
-  <li><a href="#quantitative-results" id="toc-quantitative-results" class="nav-link" data-scroll-target="#quantitative-results"><span class="header-section-number">2.4</span> Quantitative Results</a></li>
+  <li><a href="#parameter-effects" id="toc-parameter-effects" class="nav-link" data-scroll-target="#parameter-effects"><span class="header-section-number">3.1</span> Parameter Effects</a></li>
+  <li><a href="#qualitative-results" id="toc-qualitative-results" class="nav-link" data-scroll-target="#qualitative-results"><span class="header-section-number">3.2</span> Qualitative Results</a></li>
+  <li><a href="#quantitative-experimental-arrangement" id="toc-quantitative-experimental-arrangement" class="nav-link" data-scroll-target="#quantitative-experimental-arrangement"><span class="header-section-number">3.3</span> Quantitative Experimental Arrangement</a></li>
+  <li><a href="#quantitative-results" id="toc-quantitative-results" class="nav-link" data-scroll-target="#quantitative-results"><span class="header-section-number">3.4</span> Quantitative Results</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">3</span> Conclusion</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">4</span> Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -270,12 +271,13 @@ window.Quarto = {
 <div aria-describedby="fig-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/summary.png" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Overview of MultiControl pipeline
 </figcaption>
 </figure>
 </div>
-<p>Overview of MultiControl pipeline # Introduction</p>
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>Diffusion models <span class="citation" data-cites="sohl-dicksteinDeepUnsupervisedLearning2015">[<a href="#ref-sohl-dicksteinDeepUnsupervisedLearning2015" role="doc-biblioref">1</a>]</span> realize excellent performance in generative computer vision (CV) tasks, ranging from human image generation <span class="citation" data-cites="kumarbhuniaPersonImageSynthesis2023">[<a href="#ref-kumarbhuniaPersonImageSynthesis2023" role="doc-biblioref">2</a>]</span> to optical illusion formation <span class="citation" data-cites="gengVisualAnagramsGenerating2024">[<a href="#ref-gengFactorizedDiffusionPerceptual2024" role="doc-biblioref">4</a>]</span>, to multimodal generation <span class="citation" data-cites="chenImagesThatSound2024">[<a href="#ref-chenImagesThatSound2024" role="doc-biblioref">5</a>]</span>. The success of commercial applications such as DALL-E2 <span class="citation" data-cites="DALLE">[<a href="#ref-DALLE" role="doc-biblioref">6</a>]</span> and Midjourney <span class="citation" data-cites="Midjourney">[<a href="#ref-Midjourney" role="doc-biblioref">7</a>]</span> demonstrate the demand for this emerging technology.</p>
 <p>Diffusion Models (DMs) typically combine a forward and a reverse process (<a href="#fig-diffusion" class="quarto-xref">Figure&nbsp;2</a>). In Denoising Diffusion Probabilistic Models (DDPMs), one of the more popular variants of diffusion models <span class="citation" data-cites="croitoruDiffusionModelsVision2023">[<a href="#ref-croitoruDiffusionModelsVision2023" role="doc-biblioref">8</a>]</span>, the forward step consists of repeatedly adding Gaussian noise to an image across multiple time steps until the resulting image is indistinguishable from Gaussian noise. The reverse (generative) process attempts to estimate and remove the noise from the image at each time step using a Neural Network (NN). This NN is trained on images generated from applying the forward process to hundreds of millions of images<span class="citation" data-cites="croitoruDiffusionModelsVision2023">[<a href="#ref-croitoruDiffusionModelsVision2023" role="doc-biblioref">8</a>]</span>. During inference, new images can be generated by repeatedly denoisifying Gaussian noise, resulting in an image that appears to have been sampled from the training dataset.</p>
 <div id="fig-diffusion" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -339,11 +341,12 @@ Figure&nbsp;4: ControlNet image generation from Canny edge input<span class="cit
 </figure>
 </div>
 <p>Although the CN framework enables specific spatial input conditions, individual image components cannot be specified with distinct text prompts. On the other hand, the MD pipeline can generate a single consistent image from multiple independent text prompts and segmentation masks, but the individual image components are not generated with the same specificity as CN. In this work, we seek to realize increased control over generated image subcomponents by incorporating Canny Edge conditioning strategies from CN into the MD generation pipeline.</p>
-<section id="approach" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Approach</h1>
+</section>
+<section id="approach" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Approach</h1>
 <p>To implement the new pipeline, which we have termed MultiControl, we combined the core MultiDiffusion logic and sampling approach with conditioning information from ControlNet.</p>
-<section id="theory" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="theory"><span class="header-section-number">1.1</span> Theory</h2>
+<section id="theory" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="theory"><span class="header-section-number">2.1</span> Theory</h2>
 <p>Given image space <span class="math inline">\mathcal{I}</span> and condition space <span class="math inline">\mathcal{Y}</span> (eg. the text prompts) a pre-trained DM in the MD framework is represented by the mapping <span class="math display">
 \Phi : \mathcal{I} \times \mathcal{Y} \longrightarrow \mathcal{I} \ \text{s.t.} \ y \in \mathcal{Y} \ \&amp; \ I_{t} \in \mathcal{I}
 </span></p>
@@ -372,10 +375,10 @@ Figure&nbsp;5: MultiControl <code>gradio</code> application
 <p>We define our ControlLDM model wrapper in cldm.py, which is modified from the ControlNet repository and stores the core generation logic as well as the MD integration logic. Under the MD framework, we iterate over multiple views of the image to ensure visual consistency. For each view, we pass the prompt, Canny Edge conditions, and current latent to a pre-trained Stable Diffusion 1.5 checkpoint to generate and fuse the resulting generated outputs according to the MultiDiffusion approach.</p>
 </section>
 </section>
-<section id="experiments-and-results" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Experiments and Results</h1>
-<section id="parameter-effects" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="parameter-effects"><span class="header-section-number">2.1</span> Parameter Effects</h2>
+<section id="experiments-and-results" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Experiments and Results</h1>
+<section id="parameter-effects" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="parameter-effects"><span class="header-section-number">3.1</span> Parameter Effects</h2>
 <p>In this section, we provide multiple examples detailing the behavior of our MultiControl approach under multiple stress tests. We also explore the effect of varying several algorithm parameters on the quality and visual consistency of our generation results. Early on in our generation process, we noticed that many generated images tended to be visually jarring in areas with small details and contrasting colors. To counteract this issue, we took inspiration from the original ControlNet implementation by introducing adaptive control scales, which allowed us to vary the conditioning weights associated with different layers of the diffusion model. In this project, we heavily reduced the control weight for inputs later in the Stable Diffusion network, allowing it to generate high quality images while remaining visually consistent with the controlled conditioning information introduced in earlier layers (<a href="#fig-cat-man-house" class="quarto-xref">Figure&nbsp;6</a>). .</p>
 <div id="fig-cat-man-house" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -400,8 +403,8 @@ Figure&nbsp;7: Effect of generation time on image quality
 </div>
 <p>To verify the MultiControl framework’s performance quantitatively, we decided to compare its performance on a given test case against MD.</p>
 </section>
-<section id="qualitative-results" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="qualitative-results"><span class="header-section-number">2.2</span> Qualitative Results</h2>
+<section id="qualitative-results" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="qualitative-results"><span class="header-section-number">3.2</span> Qualitative Results</h2>
 <p>When working with large controls, our MultiControl pipeline tends to produce high-quality visualizations. For example, in <a href="#fig-large-controls" class="quarto-xref">Figure&nbsp;8</a>, both foreground controls (the plane and the car) are closely mirrored in the generated image. Small details such as the airplane windows are captured precisely. Background features are consistent between the control and the resulting output.</p>
 <div id="fig-large-controls" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -425,8 +428,8 @@ Figure&nbsp;9: Many smaller controls degrades image quality
 </figure>
 </div>
 </section>
-<section id="quantitative-experimental-arrangement" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="quantitative-experimental-arrangement"><span class="header-section-number">2.3</span> Quantitative Experimental Arrangement</h2>
+<section id="quantitative-experimental-arrangement" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="quantitative-experimental-arrangement"><span class="header-section-number">3.3</span> Quantitative Experimental Arrangement</h2>
 <p>To quantitatively verify the performance of MultiControl, we compared its image generation against MD for the example shown in <a href="#fig-large-controls" class="quarto-xref">Figure&nbsp;8</a>. The individual input images are shown in <a href="#fig-experiment" class="quarto-xref">Figure&nbsp;10</a>.</p>
 <div id="fig-experiment" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -471,8 +474,8 @@ Figure&nbsp;11: Segmentation masks used by MultiControl and MD &amp; Canny edge 
 </div>
 <p>For each mask, we calculated two metrics. First, recall is the number of correctly predicted edges over the total number of true edges in the mask. Second, precision is the number of correctly predicted edges over the total number of predicted edges in the mask. If MultiControl produces higher recall and precision than MultiDiffusion, we can claim that MultiControl more closely matches the input spatial conditions during its image generation process than the baseline, MultiDiffusion.</p>
 </section>
-<section id="quantitative-results" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="quantitative-results"><span class="header-section-number">2.4</span> Quantitative Results</h2>
+<section id="quantitative-results" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="quantitative-results"><span class="header-section-number">3.4</span> Quantitative Results</h2>
 <p><a href="#fig-MDvsMC" class="quarto-xref">Figure&nbsp;12 (a)</a> and <a href="#fig-MCvsMD-masks" class="quarto-xref">Figure&nbsp;12 (b)</a> show the output images and corresponding Canny Edge maps generated by MultiControl and MultiDiffusion. Table 1 lists the quantitative metrics, as described in the previous section.</p>
 <div id="fig-both" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -575,8 +578,8 @@ Table&nbsp;1: Caption MultiControl and MD Comparison of Recall and Precision for
 <p>From <a href="#tbl-results" class="quarto-xref">Table&nbsp;1</a>, we see that MultiControl achieves higher precision and recall values for both foreground generations compared to MultiDiffusion. For the car image, MultiControl has 186% and 188% greater recall and precision, respectively. For the plane image, MultiControl has 235% and 248% greater recall and precision. This quantitatively demonstrates the improved effectiveness of our framework at incorporating spatial conditioning information into the generation process to produce more controllable generations.</p>
 </section>
 </section>
-<section id="conclusion" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Conclusion</h1>
+<section id="conclusion" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Conclusion</h1>
 <p>This report has described a new integration of the MD and CN frameworks. By synthesizing independent ControlNet diffusion processes into one global MD process, we demonstrated visually consistent image generations that captured multiple spatial input conditions and prompts as image subcomponents.</p>
 <p>However, our MultiControl framework still has several areas for improvement. First, our gradio application expects images of the same overall dimensions. Future iterations should allow images of any size, then allow the user to change the scaling and positioning of foreground images on the background image. Moreover, we have not heavily tested cross-platform performance. Future work also includes incorporating other types of input spatial conditions like human pose estimation or normal maps into our code. This would be a relatively simple addition that would extend the applications of our work.</p>
 <!-- ::: {#fig-demo}

@@ -1,15 +1,16 @@
 ---
 subtitle: Virginia Tech - Fall 2024 ECE 5554 Computer Vision - Course Project
-
 abstract: |
   Diffusion models have realized excellent performance in generative computer vision tasks. Classifier-free guidance frameworks like ControlNet [9] and MultiDiffusion [10] further improve control over image generation by incorporating conditioning information into the generation process. In this work, we seek to incorporate Canny Edge conditioning strategies from ControlNet into the MultiDiffusion generation pipeline, enabling cohesive image generation from multiple independent diffusion processes using specific spatial conditioning. The resulting framework, which we have termed MultiControl, generates visually cohesive images incorporating multiple distinct Canny Edge controls. Moreover, our MultiControl framework demonstrated higher pixelwise precision and recall across multiple outputs compared to MultiDiffusion. We also provide details of our PyTorch implementation of this new framework, incorporating strategies from existing ControlNet and MultiDiffusion codebases.  
 ---
 
 ::: {#fig-summary}
 ![](images/summary.png)
-:::
 
 Overview of MultiControl pipeline
+:::
+
+
 # Introduction
 
 Diffusion models [@sohl-dicksteinDeepUnsupervisedLearning2015] realize excellent performance in generative computer vision (CV) tasks, ranging from human image generation [@kumarbhuniaPersonImageSynthesis2023] to optical illusion formation [@gengVisualAnagramsGenerating2024,@gengFactorizedDiffusionPerceptual2024], to multimodal generation [@chenImagesThatSound2024]. The success of commercial applications such as DALL-E2 [@DALLE] and Midjourney [@Midjourney] demonstrate the demand for this emerging technology.
