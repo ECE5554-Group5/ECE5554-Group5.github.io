@@ -1,0 +1,52 @@
+[
+  {
+    "objectID": "proposal.html",
+    "href": "proposal.html",
+    "title": "Applying Conditional Control to Multiple Diffusion Generation Framework",
+    "section": "",
+    "text": "Diffusion models [1] have realized excellent performance in generative computer vision tasks, ranging from human image generation [2] to optical illusion formation [4], to multimodal generation [5]. With the surging popularity of commercial applications such as DALL-E2 [6] and Midjourney [7] diffusion models have been catapulted into the public eye. While diffusion models are capable of generating high-quality images and video, they can be difficult to control due to the stochastic nature of the sampling process and ambiguity in the prompts provided. In this work, we seek to realize increased control over generated image subcomponents by incorporating Canny Edge conditioning strategies from ControlNet [8] into the MultiDiffusion [9] generation pipeline.",
+    "crumbs": [
+      "Project Proposal"
+    ]
+  },
+  {
+    "objectID": "proposal.html#borrowed-code",
+    "href": "proposal.html#borrowed-code",
+    "title": "Applying Conditional Control to Multiple Diffusion Generation Framework",
+    "section": "3.1 Borrowed Code",
+    "text": "3.1 Borrowed Code\nBoth MultiDiffusion and ControlNet are designed to enhance the capabilities of pretrained Stable Diffusion models. In this work, we’ll experiment with a variety of baseline models but will likely use the Stable Diffusion 2 model from Stability AI due to its popularity. Additionally, as open-source implementations of both MultiDiffusion and ControlNet are available, we intend to leverage these in our solution. However, we will implement code combining these two approaches ourselves.",
+    "crumbs": [
+      "Project Proposal"
+    ]
+  },
+  {
+    "objectID": "proposal.html#data-collection",
+    "href": "proposal.html#data-collection",
+    "title": "Applying Conditional Control to Multiple Diffusion Generation Framework",
+    "section": "3.2 Data Collection",
+    "text": "3.2 Data Collection\nBecause we’re working with a pretrained model, significantly less data is required compared to training a model from scratch. However, we will still need to collect images to finetune our networks with, so we intend to use a tool such as Imageye [11] to download large quantities of images from Google Images. Alternatively, we may also explore making use of existing image datasets such as the Common Objects in Context (COCO) dataset or one of the Large-scale Artificial Intelligence Open Network (LAION) datasets.",
+    "crumbs": [
+      "Project Proposal"
+    ]
+  },
+  {
+    "objectID": "proposal.html#experiments",
+    "href": "proposal.html#experiments",
+    "title": "Applying Conditional Control to Multiple Diffusion Generation Framework",
+    "section": "3.3 Experiments",
+    "text": "3.3 Experiments\nOur experiments will consist of multiple output generations using our proposed pipeline. In general, output images should be visually consistent and reflective of both the input Canny edges and segmentation masks.\n\n3.3.1 Functionality Validation\nWe will provide at least two Canny edge inputs to our pipeline to generate a single image. Our model is successful if: 1. The output is controllable: For each distinct Canny edge input/segmentation mask, 90% of the input edges are accounted for by the Canny edge version of the corresponding region in the output image. Visual inspection should confirm that the output reflects the original Canny edge input. 2. The output is visually consistent: Visual inspection should confirm the output appears as one cohesive image with similar visual theming, lighting, and color grading throughout, rather than multiple images from different sources being joined together.\n\n\n3.3.2 Performance Comparison\nWe will test the results of our proposed pipeline against MultiDIffusion outputs without ControlNet features by comparing the visual consistency, time, and adherence to prompts. We aim to achieve improved performance compared to MultiDiffusion generations not enhanced with ControlNet Canny features.\n\n\n3.3.3 Stress Testing\nTo further understand the limitations of our proposed pipeline, we will attempt to find the lower limit on the size of the masks & the upper limit on the number of masks per image prior to breakdown of image quality caused by generations visually appearing significantly different from input Canny edges.\n\n\n3.3.4 Influence of Dataset sizes\nAs in Zheng et al (2023)[8], we will explore the effect of decreasing training dataset size on the generation of recognizable images. We anticipate that our pipeline will achieve a similar breakdown point to the baseline ControlNet training.",
+    "crumbs": [
+      "Project Proposal"
+    ]
+  },
+  {
+    "objectID": "report.html",
+    "href": "report.html",
+    "title": "Applying Conditional Control to Multiple Diffusion Generation Framework",
+    "section": "",
+    "text": "Figure 1: A demonstrative application showcasing the MultiDiffusion + ControlNet Model\n\n\n\n\nimport cv2\nimport gradio as gr\nimport numpy as np\n\ndef apply_canny(image):\n    return cv2.Canny(image,100,200)\n\ninterface = gr.Interface(\n    fn=apply_canny,\n    inputs=gr.Image(sources=['upload'], type=\"numpy\", label=\"Input Image\"),\n    outputs=gr.Image(type=\"numpy\", label=\"Input Image\"),\n    # layout=\"horizontal\"\n)\n\ninterface.launch(inline=True,show_api=False)\n\n* Running on local URL:  http://127.0.0.1:7860\n\nTo create a public link, set `share=True` in `launch()`.",
+    "crumbs": [
+      "Final Report"
+    ]
+  }
+]
