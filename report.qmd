@@ -66,7 +66,7 @@ The MD framework fuses multiple diffusion processes by defining a global process
 
 The global process, termed the MultiDiffusion process, is defined as
 $$
-\Psi = \mathcal{J} \times \mathcal{Z} \longrightarrow \mathcal{J} \ \text{s.t.} \ J_{t} \in \mathcal{J} \ \& \ z \in \mathcal{Z}
+\Psi : \mathcal{J} \times \mathcal{Z} \longrightarrow \mathcal{J} \ \text{s.t.} \ J_{t} \in \mathcal{J} \ \& \ z \in \mathcal{Z}
 $$
 
 For each $i$th diffusion process, mappings are defined from the global image and conditon condition spaces to I and Y. An optimization is then performed to ensure the output of each MultiDiffuser step, $J_{t-1} = \Psi(J_{t}|z)$ is similar to the output of the pretrained diffusion model (@eq-generative-process).
