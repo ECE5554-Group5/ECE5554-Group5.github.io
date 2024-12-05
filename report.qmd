@@ -6,7 +6,7 @@ abstract: |
 ---
 
 ::: {#fig-summary}
-![](images/fig5.png)
+![](images/summary.png)
 :::
 
 # Introduction
@@ -184,7 +184,7 @@ However, our MultiControl framework still has several areas for improvement. Fir
 	frameborder="0"
 	width=75%
 	height="450"
-></iframe> -->
+></iframe>
 
 A demonstrative application showcasing the **MultiDiffusion** + **ControlNet** Model
-:::
+::: -->

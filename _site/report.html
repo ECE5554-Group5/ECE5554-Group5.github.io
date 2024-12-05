@@ -276,7 +276,7 @@ window.Quarto = {
 <div id="fig-summary" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/fig5.png" class="img-fluid figure-img">
+<img src="images/summary.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1
@@ -589,17 +589,16 @@ Table&nbsp;1: Caption MultiControl and MD Comparison of Recall and Precision for
 <h1 data-number="4"><span class="header-section-number">4</span> Conclusion</h1>
 <p>This report has described a new integration of the MD and CN frameworks. By synthesizing independent ControlNet diffusion processes into one global MD process, we demonstrated visually consistent image generations that captured multiple spatial input conditions and prompts as image subcomponents.</p>
 <p>However, our MultiControl framework still has several areas for improvement. First, our gradio application expects images of the same overall dimensions. Future iterations should allow images of any size, then allow the user to change the scaling and positioning of foreground images on the background image. Moreover, we have not heavily tested cross-platform performance. Future work also includes incorporating other types of input spatial conditions like human pose estimation or normal maps into our code. This would be a relatively simple addition that would extend the applications of our work.</p>
-<div id="fig-demo" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-demo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<iframe src="https://yuanshi-ominicontrol.hf.space" frameborder="0" width="75%" height="450">
-</iframe>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-demo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13: A demonstrative application showcasing the <strong>MultiDiffusion</strong> + <strong>ControlNet</strong> Model
-</figcaption>
-</figure>
-</div>
+<!-- ::: {#fig-demo}
+<iframe
+    src="https://yuanshi-ominicontrol.hf.space"
+    frameborder="0"
+    width=75%
+    height="450"
+></iframe>
+
+A demonstrative application showcasing the **MultiDiffusion** + **ControlNet** Model
+::: -->
 
 
 
