@@ -178,13 +178,13 @@ This report has described a new integration of the MD and CN frameworks. By synt
 However, our MultiControl framework still has several areas for improvement. First, our gradio application expects images of the same overall dimensions. Future iterations should allow images of any size, then allow the user to change the scaling and positioning of foreground images on the background image. Moreover, we have not heavily tested cross-platform performance. Future work also includes incorporating other types of input spatial conditions like human pose estimation or normal maps into our code. This would be a relatively simple addition that would extend the applications of our work.
 
 
-::: {#fig-demo}
+<!-- ::: {#fig-demo}
 <iframe
 	src="https://yuanshi-ominicontrol.hf.space"
 	frameborder="0"
 	width=75%
 	height="450"
-></iframe>
+></iframe> -->
 
 A demonstrative application showcasing the **MultiDiffusion** + **ControlNet** Model
 :::
