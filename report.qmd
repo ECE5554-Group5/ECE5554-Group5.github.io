@@ -1,6 +1,6 @@
 ---
 subtitle: Virginia Tech - Fall 2024 ECE 5554 Computer Vision - Course Project
-date: today
+# date: today
 abstract: |
   Diffusion models have realized excellent performance in generative computer vision tasks. Classifier-free guidance frameworks like ControlNet and MultiDiffusion further improve control over image generation by incorporating conditioning information into the generation process. In this work, we seek to incorporate Canny Edge conditioning strategies from ControlNet into the MultiDiffusion generation pipeline, enabling cohesive image generation from multiple independent diffusion processes using specific spatial conditioning. The resulting framework, which we have termed MultiControl, generates visually cohesive images incorporating multiple distinct Canny Edge controls. Moreover, [quantitative results summary]. We also provide details of our PyTorch implementation of this new framework, incorporating strategies from existing ControlNet and MultiDiffusion codebases. 
 ---
@@ -120,7 +120,7 @@ Large controls confer high-quality images
 Throughout testing, however, two key predictors of failure emerged – small controls and high numbers of controls. When conditioning on large numbers of controls, especially Canny Edges induced by smaller images, the level of detail decreases significantly. @fig-small-controls shows four different input scenarios with varying numbers of controlled generations. In the leftmost image, a single, relatively large control is inserted into the image, resulting in a high-quality generation. Moving to the right, as more controls are added of decreasing size, conformance to the control canny edges decreases significantly. In the final example, with nine cats, three control images were placed in the top row of windows in the building. However, due to their small sizes, it is difficult to visually detect any cats in the top row of windows. 
 
 ::: {#fig-small-controls}
-![](images/large-controls)
+![](images/small-controls)
 
 Many smaller controls degrades image quality
 :::

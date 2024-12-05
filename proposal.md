@@ -1,6 +1,6 @@
 ---
 subtitle: Virginia Tech - Fall 2024 ECE 5554 Computer Vision - Course Project Proposal
-date: 10/9/20204
+# date: 10/9/2024
 ---
 
 
