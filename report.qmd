@@ -1,0 +1,37 @@
+---
+subtitle: Virginia Tech - Fall 2024 ECE 5554 Computer Vision - Course Project
+date: today
+abstract: |
+  Diffusion models have realized excellent performance in generative computer vision tasks, and emerging frameworks like ControlNet and MultiDiffusion further improve control over image generation. In this work, we seek to incorporate Canny Edge conditioning strategies from ControlNet into the MultiDiffusion generation pipeline, enabling cohesive image generation from multiple independent diffusion processes with highly specific spatial conditioning. We implemented this new framework by [methods summary]. The compound model could generate visually cohesive images with multiple Canny Edge input masks. Moreover, [quantitative results summary].
+---
+
+
+::: {#fig-demo}
+<iframe
+	src="https://yuanshi-ominicontrol.hf.space"
+	frameborder="0"
+	width=75%
+	height="450"
+></iframe>
+
+A demonstrative application showcasing the **MultiDiffusion** + **ControlNet** Model
+:::
+
+```{python}
+import cv2
+import gradio as gr
+import numpy as np
+
+def apply_canny(image):
+    return cv2.Canny(image,100,200)
+
+interface = gr.Interface(
+    fn=apply_canny,
+    inputs=gr.Image(sources=['upload'], type="numpy", label="Input Image"),
+    outputs=gr.Image(type="numpy", label="Input Image"),
+    # layout="horizontal"
+)
+
+interface.launch(inline=True,show_api=False)
+```
+

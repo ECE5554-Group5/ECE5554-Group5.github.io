@@ -1,14 +1,6 @@
 ---
-title: Applying Conditional Control to Multiple Diffusion Generation Framework
-subtitle: Virginia Tech - Fall 2024 ECE 5554 Computer Vision - Course Project
-author: Caleb McIrvin, Thomas Lu, Alessandro Shapiro
-number-sections: true
-bibliography: refs.bib
-csl: diabetologia.csl
-format:
-    html:
-        css: css/bootstrap.css
-        html-math-method: katex
+subtitle: Virginia Tech - Fall 2024 ECE 5554 Computer Vision - Course Project Proposal
+date: 10/9/20204
 ---
 
 

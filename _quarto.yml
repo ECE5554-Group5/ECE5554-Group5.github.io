@@ -1,0 +1,39 @@
+project:
+  type: website
+
+website:
+  page-navigation: true
+  bread-crumbs: true
+  sidebar:
+    title: Navigation
+    style: "floating"
+    search: true
+    contents:
+      - text: "Project Proposal"
+        href: proposal.md
+      - text: "Final Report"
+        href: report.qmd
+number-sections: true
+bibliography: refs.bib
+csl: diabetologia.csl
+format:
+    html:
+      page-layout: full
+      # css: css/bootstrap.css
+      theme: cosmo
+      html-math-method: katex
+      toc: true
+title: Applying Conditional Control to Multiple Diffusion Generation Framework
+author: 
+    - name: Caleb McIrvin
+      affiliation:
+        - ref: vt 
+    - name: Thomas Lu
+      affiliation:
+        - ref: vt
+    - name: Alessandro Shapiro
+      affiliation:
+        - ref: vt
+affiliations:
+    - id: vt
+      name: Virginia Polytechnic Institute and State University
