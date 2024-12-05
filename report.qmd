@@ -60,7 +60,7 @@ $$
 I_{t-1} = \Phi(I_{t} | y)
 $$ {#eq-generative-process}
 
-eventually ending into a clean image $I_{0}$. 
+eventually ending in a clean image $I_{0}$. 
 
 The MD framework fuses multiple diffusion processes by defining a global process over global image space $\mathcal{J}$ and global condition space $\mathcal{Z}$, which reflects the individual diffusion processes as much as possible. Specifically, it works by applying the diffusion model multiple times across different views of the image.  
 

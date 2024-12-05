@@ -353,7 +353,7 @@ Figure&nbsp;4: ControlNet image generation from Canny edge input<span class="cit
 <p>Starting from noisy image <span class="math inline">I_{T}</span> the generative process, at each time step <span class="math inline">t</span> obstains the next denoised image as <span id="eq-generative-process"><span class="math display">
 I_{t-1} = \Phi(I_{t} | y)
 \tag{1}</span></span></p>
-<p>eventually ending into a clean image <span class="math inline">I_{0}</span>.</p>
+<p>eventually ending in a clean image <span class="math inline">I_{0}</span>.</p>
 <p>The MD framework fuses multiple diffusion processes by defining a global process over global image space <span class="math inline">\mathcal{J}</span> and global condition space <span class="math inline">\mathcal{Z}</span>, which reflects the individual diffusion processes as much as possible. Specifically, it works by applying the diffusion model multiple times across different views of the image.</p>
 <p>The global process, termed the MultiDiffusion process, is defined as <span class="math display">
 \Psi = \mathcal{J} \times \mathcal{Z} \longrightarrow \mathcal{J} \ \text{s.t.} \ J_{t} \in \mathcal{J} \ \&amp; \ z \in \mathcal{Z}
